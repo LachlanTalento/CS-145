@@ -5,6 +5,10 @@
 //
 // This program will do the following: run a game where the program comes up with a random
 // number for the user to guess.
+//
+// For this new rendition of this lab, I made sure there were no bugs in the program;
+// whenever the users input is asked there will be no errors, even if their input is not valid.
+// I also made sure to add comments when needed, to make the code more readable.
 
 import java.util.*;
 
