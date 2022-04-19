@@ -46,6 +46,7 @@ public class Critter {
 
     // This method should be overriden (default color is black)
     public Color getColor() {
+
         return Color.BLACK;
     }
 

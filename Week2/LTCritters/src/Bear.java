@@ -2,13 +2,17 @@ import java.awt.*;
 
 public class Bear extends Critter {
 
-    public Bear(boolean polar) {
+    private boolean flip;
+    private boolean polar;
 
+    public Bear(boolean polar) {
 
 
     }
 
-    public Color getColor(boolean polar) {
+    public Color getColor() {
+
+        polar = !polar;
 
         if (polar) {
 
@@ -19,7 +23,6 @@ public class Bear extends Critter {
             return Color.BLACK;
 
         }
-
     }
 
     public Action getMove(CritterInfo info) {
@@ -42,7 +45,17 @@ public class Bear extends Critter {
 
     public String toString() {
 
-        return "/";
+        flip = !flip;
+
+        if (flip) {
+
+            return "/";
+
+        } else {
+
+            return "\\";
+
+        }
 
     }
 
