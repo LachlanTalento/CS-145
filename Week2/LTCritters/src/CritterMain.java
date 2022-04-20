@@ -4,11 +4,11 @@
 // Course:           CS&145
 // Lab:              Critters
 //
-// This Program will do the following:
+// This Program will do the following: run a simulation full of different critters with
+// unique set of directions to follow, and they are each trying to infect other critter
+// until they are infected or they infect the rest.
 //
-// I got all this working, but I couldn't do this...
-//
-// For my Orca AI I...
+// I got all this working, but I couldn't get the random color generator for the lion.
 
 public class CritterMain {
     public static void main(String[] args) {
