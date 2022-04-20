@@ -33,13 +33,13 @@ public class Bear extends Critter {
 
             return Action.INFECT; // Infect the critter in front of them
 
-        } else if (info.getFront() == Neighbor.EMPTY) {
+        } else if (info.getFront() == Neighbor.WALL || info.getFront() == Neighbor.SAME) {
 
-            return Action.HOP; // Moves forward
+            return Action.LEFT; // Turns left
 
         } else {
 
-            return Action.LEFT; // Turns left
+            return Action.HOP; // Moves forward
 
         } // End of else statement
 
