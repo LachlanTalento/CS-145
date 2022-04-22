@@ -5,8 +5,8 @@
 // Lab:              Critters
 //
 // This Program will do the following: run a simulation full of different critters with
-// unique set of directions to follow, and they are each trying to infect other critter
-// until they are infected or they infect the rest.
+// unique set of directions to follow, and they are each trying to infect other critters
+// until they are infected, or they infect the rest.
 //
 // I got all this working, but I couldn't get the random color generator for the lion.
 
