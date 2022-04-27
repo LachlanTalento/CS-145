@@ -5,6 +5,11 @@
 //
 // This program will do the following: 
 
+import package.src.*;
+
 public class LTCardGameWar {
-	
+	public void main(String[] args) {
+		System.out.println("Hello World!");
+	}
 }
+
