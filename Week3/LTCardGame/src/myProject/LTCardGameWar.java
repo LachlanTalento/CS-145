@@ -47,10 +47,12 @@ public class LTCardGameWar {
 		
 		LinkedList<Card> playerOneDeck = new LinkedList<Card>();
 		LinkedList<Card> playerTwoDeck = new LinkedList<Card>();
-		String playerOneTopCard = "" + playerOneDeck.get(0);
-		String playerTwoTopCard = "" + playerTwoDeck.get(0);
+//		Card playerOneTopCard = playerOneDeck.get(0);
+//		Card playerTwoTopCard = playerTwoDeck.get(0);
 		int playerOneTopCardFace;
 		int playerTwoTopCardFace;
+		String playerOneTopCard;
+		String playerTwoTopCard;
 		
 		for (int count = 0; count <= NUMBER_OF_CARDS; count++) {
 			if (count % 2 == 0) {
@@ -59,11 +61,15 @@ public class LTCardGameWar {
 				playerOneDeck.add(myDeckOfCards.dealCard());
 			} // End of if/else statement
 		} // End of for loop
-		System.out.println(playerOneTopCard);
-		System.out.println(playerTwoTopCard);
+		System.out.println("Player one drew a " + playerOneDeck.get(0));
+		System.out.println("Player two drew a " + playerTwoDeck.get(0));
 		
+		playerOneTopCard = "" + playerOneDeck.get(0);
+		playerTwoTopCard = "" + playerTwoDeck.get(0);
+		// System.out.println(playerOneTopCard);
 		playerOneTopCardFace = getValue(playerOneTopCard);
 		playerTwoTopCardFace = getValue(playerTwoTopCard);
+		System.out.println();
 		
 		if (playerOneTopCardFace > playerTwoTopCardFace) {
 			System.out.println("Player One Wins!");
@@ -71,7 +77,7 @@ public class LTCardGameWar {
 			System.out.println("Player Two Wins!");
 		} else {
 			System.out.println("Initiating War");
-		}
+		} // End of if/else statement
 		
 	} // End of playGame method
 	
@@ -79,10 +85,10 @@ public class LTCardGameWar {
 		
 	} // End of war method
 	
-	public static int getValue(String playerTopCard) throws IndexOutOfBoundsException {
+	public static int getValue(String playerOneTopCard) {
 		int value;
 		
-		String[] words = playerTopCard.split(" ");
+		String[] words = playerOneTopCard.split(" ");
 		String faces = words[0];
 		
 		switch (faces) {
