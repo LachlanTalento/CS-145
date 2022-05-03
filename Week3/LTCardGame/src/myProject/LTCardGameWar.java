@@ -3,22 +3,23 @@
 // Course:     CS&145
 // Lab:        Card Game
 //
-// This program will do the following: 
+// This program will do the following: run a two player Card game called War.
 
 package myProject;
 
 import java.util.*;
 
 public class LTCardGameWar {
-	private static final int NUMBER_OF_CARDS = 52;
+	private final static int NUMBER_OF_CARDS = 52;
 
 	public static void main(String[] args) throws IndexOutOfBoundsException {
+		Scanner input = new Scanner(System.in);
 		// Display instructions
 		instructions();
-		// Display menu
 		// Start the game
-		playGame();
-		// Ask if the User Wants to play again
+		int roundCount = playGame(input);
+		// Display the game results
+		results(roundCount);
 	} // End of main method
 	
 	// Display the instructions
@@ -37,54 +38,119 @@ public class LTCardGameWar {
 		System.out.println("has no more cards to play, with them as the loser.\n");
 	} // End of instructions method
 	
-	public static int menu() {
-		return 0;
-	} // End of menu method
-	
-	public static void playGame() {
+	// Starts the Game
+	public static int playGame(Scanner input) {
+		// Initializing DeckOfCards
 		DeckOfCards myDeckOfCards = new DeckOfCards();
-		myDeckOfCards.shuffle(); // Place Cards in a random order
-		
+		// Creates two separate decks for both players
 		LinkedList<Card> playerOneDeck = new LinkedList<Card>();
 		LinkedList<Card> playerTwoDeck = new LinkedList<Card>();
-//		Card playerOneTopCard = playerOneDeck.get(0);
-//		Card playerTwoTopCard = playerTwoDeck.get(0);
+		// Initializing variables
+		final int currentCard = 0;
+		final int warCard = currentCard + 4;
 		int playerOneTopCardFace;
 		int playerTwoTopCardFace;
 		String playerOneTopCard;
 		String playerTwoTopCard;
+		int playerOneDeckSize = playerOneDeck.size();;
+		int playerTwoDeckSize = playerTwoDeck.size();;
+		boolean isEqual = true;
+		String in;
+		int roundCount = 0;
 		
-		for (int count = 0; count <= NUMBER_OF_CARDS; count++) {
+		myDeckOfCards.shuffle(); // Place Cards in a random order
+		
+		// Separates the deck into two separate decks for both players
+		for (int count = 0; count <= NUMBER_OF_CARDS - 1; count++) {
 			if (count % 2 == 0) {
 				playerTwoDeck.add(myDeckOfCards.dealCard());
 			} else {
 				playerOneDeck.add(myDeckOfCards.dealCard());
 			} // End of if/else statement
 		} // End of for loop
-		System.out.println("Player one drew a " + playerOneDeck.get(0));
-		System.out.println("Player two drew a " + playerTwoDeck.get(0));
 		
-		playerOneTopCard = "" + playerOneDeck.get(0);
-		playerTwoTopCard = "" + playerTwoDeck.get(0);
+		// Begins the Game
+		do {
+		System.out.println("Player One Drew a " + playerOneDeck.get(currentCard));
+		System.out.println("Player Two Drew a " + playerTwoDeck.get(currentCard));
+		
+		playerOneTopCard = "" + playerOneDeck.get(currentCard);
+		playerTwoTopCard = "" + playerTwoDeck.get(currentCard);
 		// System.out.println(playerOneTopCard);
-		playerOneTopCardFace = getValue(playerOneTopCard);
-		playerTwoTopCardFace = getValue(playerTwoTopCard);
+		playerOneTopCardFace = getValue(playerOneTopCard); // Gets the face value for player One
+		playerTwoTopCardFace = getValue(playerTwoTopCard); // Gets the face value for player Two
 		System.out.println();
 		
-		if (playerOneTopCardFace > playerTwoTopCardFace) {
-			System.out.println("Player One Wins!");
-		} else if (playerOneTopCardFace < playerTwoTopCardFace) {
-			System.out.println("Player Two Wins!");
-		} else {
-			System.out.println("Initiating War");
+		if (playerOneTopCardFace > playerTwoTopCardFace) { // If Player One Wins
+			// Adds player Two's Card to player One
+			playerOneDeck.add(playerTwoDeck.get(currentCard));
+			// Removes that Card from player Two's deck
+			playerTwoDeck.remove(playerTwoDeck.get(currentCard));
+			playerOneDeckSize = playerOneDeck.size();
+			playerTwoDeckSize = playerTwoDeck.size();
+			System.out.printf("Player One Wins a card +1 (%d)%n", playerOneDeckSize);
+			System.out.printf("Player Two Loses a card +1 (%d)%n" , playerTwoDeckSize);
+		} else if (playerOneTopCardFace < playerTwoTopCardFace) { // If Player Two Wins
+			// Adds player One's Card to player Two
+			playerTwoDeck.add(playerOneDeck.get(currentCard));
+			// Removes that Card from player One's deck
+			playerOneDeck.remove(playerOneDeck.get(currentCard));
+			playerTwoDeckSize = playerTwoDeck.size();
+			playerOneDeckSize = playerOneDeck.size();
+			System.out.printf("Player One Loses a Card -1 (%d)%n", playerOneDeckSize);
+			System.out.printf("Player Two Wins a Card +1 (%d)%n" , playerTwoDeckSize);
+		} else { // If both players have equal value Cards
+			isEqual = true;
+			
+			while (isEqual == true) { 
+				System.out.println("I Declare WAR!\n");
+				System.out.println("Player One Drew a " + playerOneDeck.get(warCard));
+				System.out.println("Player Two Drew a " + playerTwoDeck.get(warCard));
+				
+				playerOneTopCard = "" + playerOneDeck.get(warCard);
+				playerTwoTopCard = "" + playerTwoDeck.get(warCard);
+				playerOneTopCardFace = getValue(playerOneTopCard);
+				playerTwoTopCardFace = getValue(playerTwoTopCard);
+				System.out.println();
+				if (playerOneDeckSize >= 4) {
+					if (playerOneTopCardFace > playerTwoTopCardFace) { // If Player One Wins
+						for (int i = 0; i <= 4; i++) { // Removes and Adds 4 Cards
+							playerOneDeck.add(playerTwoDeck.get(currentCard + i));
+							playerTwoDeck.remove(playerTwoDeck.get(currentCard + i));
+						} // End of for loop
+						playerOneDeckSize = playerOneDeck.size();
+						playerTwoDeckSize = playerTwoDeck.size();
+						System.out.printf("Player One Wins Four Cards +1 (%d)%n", 
+								playerOneDeckSize);
+						System.out.printf("Player Two Loses Four Cards +1 (%d)%n" ,
+								playerTwoDeckSize);
+						isEqual = false;
+					} else if (playerOneTopCardFace < playerTwoTopCardFace) { // If Player Two Wins
+						for (int i = 0; i <= 4; i++) { // Removes and adds 4 Cards
+							playerTwoDeck.add(playerOneDeck.get(currentCard + i));
+							playerOneDeck.remove(playerOneDeck.get(currentCard + i));
+						} // End of for loop
+						playerTwoDeckSize = playerTwoDeck.size();
+						playerOneDeckSize = playerOneDeck.size();
+						System.out.printf("Player One Loses Four Cards -4 (%d)%n",
+								playerOneDeckSize);
+						System.out.printf("Player Two Wins Four Cards +4 (%d)%n" ,
+								playerTwoDeckSize);
+						isEqual = false;
+					} else {} // End of if/else statement
+				} else {
+					playerOneDeckSize = 0; // Stops the Game
+				}// End of if/else statement
+			} // End of while loop
 		} // End of if/else statement
-		
+		System.out.println("\nType in Anything to Continue"); // Adds a break between each round
+		in = input.next();
+		roundCount++;
+		} while (playerOneDeckSize != 0 && playerTwoDeckSize != 0);
+		return roundCount;
 	} // End of playGame method
 	
-	public static void war() {
-		
-	} // End of war method
-	
+	// Gets the value for each Card
 	public static int getValue(String playerOneTopCard) {
 		int value;
 		
@@ -134,6 +200,10 @@ public class LTCardGameWar {
 		} // End of switch/case statement
 		return value;
 	} // End of getValue method
+	
+	// Displays the game results
+	public static void results(int roundCount) {
+		System.out.printf("You Played %d Rounds This Game\n\n", roundCount);
+		System.out.println("Thank You for Playing!");
+	} // End of results method
 } // End of LTCardGameWar
-
-

@@ -3,7 +3,7 @@
 // Course:     CS&145
 // Lab:        Card Game
 //
-// This class will do the following: 
+// This class will do the following: creates the representation of Card
 
 package myProject;
 
