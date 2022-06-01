@@ -1,7 +1,7 @@
 // Programmer: Lachlan Talento
-// Date:       5/2/2022
+// Date:       5/31/2022
 // Course:     CS&145
-// Lab:        Towers of Hanoi
+// Lab:        Word Search Generator
 //
 // This program will do the following: Generate a crossword puzzle
 
