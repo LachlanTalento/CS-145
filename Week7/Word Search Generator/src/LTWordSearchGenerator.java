@@ -1,3 +1,10 @@
+// Programmer: Lachlan Talento
+// Date:       5/2/2022
+// Course:     CS&145
+// Lab:        Towers of Hanoi
+//
+// This program will do the following: Generate a crossword puzzle
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
